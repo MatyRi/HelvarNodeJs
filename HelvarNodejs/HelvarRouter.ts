@@ -2,6 +2,7 @@
 //import UdpSender = require("UDPSender");
 import * as Command from "./Command/ACommand";
 import * as UdpSender from "./UDPSender";
+import Address = require("DeviceAddress");
 
 export class HelvarRouter {
     sWgName: string;
@@ -24,6 +25,10 @@ export class HelvarRouter {
         this.sIpAddress = sIpAddress;
         this.gtin = gtin;
         this.serialNumber = serialNumber;
+    }
+
+    getAddress = (): Address.DeviceAddress => {
+        return new Address.DeviceAddress(); // TODO
     }
 
     sendCommand(input: Command.ACommand) {

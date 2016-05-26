@@ -1,3 +1,7 @@
 ﻿export abstract class ACommand {
-    abstract toCommandString() : string;
+    abstract toCommandTextString(): string;
+
+    public toCommandString(): string {
+        return `>${this.toCommandTextString()}#`;
+    }
 }

@@ -44,7 +44,10 @@
     <TypeScriptCompile Include="Command\ACommand.ts" />
     <TypeScriptCompile Include="Command\AControlCommand.ts" />
     <TypeScriptCompile Include="Command\Control\DirectLevelDevice.ts" />
+    <TypeScriptCompile Include="Command\Control\RecallSceneDevice.ts" />
+    <TypeScriptCompile Include="Command\Control\RecallSceneGroup.ts" />
     <TypeScriptCompile Include="Command\Query\AQuery.ts" />
+    <TypeScriptCompile Include="DeviceAddress.ts" />
     <TypeScriptCompile Include="HelvarRouter.ts" />
     <TypeScriptCompile Include="HelvarSystem.ts" />
     <TypeScriptCompile Include="Scripts\typings\node\node.d.ts" />

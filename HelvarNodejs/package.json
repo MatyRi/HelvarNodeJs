@@ -1,0 +1,10 @@
+{
+  "name": "HelvarNodejs",
+  "version": "0.0.0",
+  "description": "HelvarNodejs",
+  "main": "app.js",
+  "author": {
+    "name": "Maty",
+    "email": "matyas.richter@gmail.com"
+  }
+}

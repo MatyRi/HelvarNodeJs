@@ -11,8 +11,10 @@ export class UDPComm implements Comm.IComm {
 
     port: number;
     address: string;
+    messageCenter: Center;
 
     constructor(mc: Center, port: number) {
+        this.messageCenter = mc;
         this.port = port;
         CommonListener.registerReceiver(mc.getAddress(), this);
         this.address = mc.getAddress();
@@ -30,7 +32,7 @@ export class UDPComm implements Comm.IComm {
     }
 
     public receiveString(message: string) {
-        console.log(message);
+        this.messageCenter.addResponse(message);
     }
 
 

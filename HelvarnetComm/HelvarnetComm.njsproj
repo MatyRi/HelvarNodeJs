@@ -48,6 +48,8 @@
     <TypeScriptCompile Include="Command\IError.ts" />
     <TypeScriptCompile Include="Command\Query\AQuery.ts" />
     <TypeScriptCompile Include="Command\Query\IQuery.ts" />
+    <TypeScriptCompile Include="Command\Query\QueryGroupPowerConsumption.ts" />
+    <TypeScriptCompile Include="Command\Query\QuerySoftwareVersion.ts" />
     <TypeScriptCompile Include="Comm\IComm.ts" />
     <TypeScriptCompile Include="Comm\UDPComm.ts" />
     <TypeScriptCompile Include="Comm\UDPCommonListener.ts" />

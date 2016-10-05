@@ -46,8 +46,8 @@ export class UDPCommonListener {
       });
 
       server.on("message", (message, remote) => {
-          console.log(`New message ${message} from ${remote}`);
-          this.receiveDatagram(remote, message);
+          console.log(`New message ${message} from ${remote.address}`);
+          this.receiveDatagram(remote.address, message.toString());
           //var newHr = this.parseRouter(message);
           //this.sys(newHr, remote);
       });

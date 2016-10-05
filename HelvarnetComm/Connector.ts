@@ -16,7 +16,7 @@ export class Connector {
 
     }
 
-    /*sendQuery<T extends Query.AQuery>(request: T): T {
+    sendQuery<T extends Query.AQuery>(request: T): T {
         if (this.messanger != null) {
             try {
                 var result = this.messanger.sendQuery<Query.AQuery>(request);
@@ -37,7 +37,23 @@ export class Connector {
             request.setError(EDiagnostics.NOTDELIVERED);
         }
         return request;
-    }*/
+    }
+
+    sendQueryWithCallback<T extends Query.AQuery>(request: T, callback: (result: string) => any): T {
+        if (this.messanger != null) {
+            try {
+                this.messanger.sendQueryWithCallback<Query.AQuery>(request, callback);
+            } catch (error) {
+                console.log("Request [" + request.toLogFriendlyString() + "] was cancelled: " + error);
+                request.setError(EDiagnostics.TIMEOUT);
+                return request;
+            }
+        } else {
+            console.log("Router has not assigned sender!");
+            request.setError(EDiagnostics.NOTDELIVERED);
+        }
+        return request;
+    }
 
     send(message: Command.ACommand): void {
         if (this.messanger != null) {

@@ -7,5 +7,6 @@ export interface IMessageCenter {
     start(): void;
     addMessage(message: Message.IMessage): void;
     sendQuery<T extends Query.AQuery>(request: T): T;
+    sendQueryWithCallback<T extends Query.AQuery>(request: T, callback: (result: string) => any): void;
     close(): void;
 }

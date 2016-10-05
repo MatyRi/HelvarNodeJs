@@ -19,7 +19,7 @@ export class DirectLevelDevice extends ControlCommand.AControlCommand {
     }
 
     toCommandTextString(): string {
-        return `C:${this.command},V:${this.version},${this.address},L:${this.level},F:${this.fadeTime}`;
+        return `C:${this.command},V:${this.version},@${this.address},L:${this.level},F:${this.fadeTime}`;
     }
 
 }

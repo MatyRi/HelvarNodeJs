@@ -1,0 +1,10 @@
+{
+  "name": "HelvarnetComm",
+  "version": "0.0.0",
+  "description": "HelvarnetComm",
+  "main": "app.js",
+  "author": {
+    "name": "Maty",
+    "email": ""
+  }
+}

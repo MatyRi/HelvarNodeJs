@@ -1,9 +1,8 @@
-﻿import Comm = require("./IComm");
-import Comm1 = Comm.IComm;
+﻿import {IComm} from "./IComm";
 
 export class UDPCommonListener {
 
-    static receivers: { [id: string]: Comm1; } = {};
+    static receivers: { [id: string]: IComm; } = {};
     //static receivers: Map<string, Comm1> = new HashMap<>();
     //static ExecutorService executor = Executors.newSingleThreadExecutor(NamedThreadFactory.make("UDPCommonListenerExecutor"));
     static INSTANCE: UDPCommonListener = new UDPCommonListener();
@@ -29,7 +28,7 @@ export class UDPCommonListener {
         }
     }
   
-  static registerReceiver(address: string, icomm: Comm.IComm ): void
+  static registerReceiver(address: string, icomm: IComm ): void
 {
     this.receivers[address] = icomm;
     this.start();

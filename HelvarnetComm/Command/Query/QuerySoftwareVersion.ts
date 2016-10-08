@@ -1,6 +1,6 @@
-﻿import AQuery1 = require("./AQuery");
+﻿import {AQuery} from "./AQuery";
 
-export class QuerySoftwareVersion extends AQuery1.AQuery {
+export class QuerySoftwareVersion extends AQuery {
 
     private command = 190;
     private version = 1;

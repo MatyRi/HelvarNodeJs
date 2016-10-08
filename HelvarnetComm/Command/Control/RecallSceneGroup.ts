@@ -1,6 +1,6 @@
-﻿import ControlCommand = require("../AControlCommand");
+﻿import {AControlCommand} from "../AControlCommand";
 
-export class RecallSceneGroup extends ControlCommand.AControlCommand {
+export class RecallSceneGroup extends AControlCommand {
 
     private command = 11;
     private version = 1;

@@ -1,6 +1,6 @@
-﻿import AQuery1 = require("./AQuery");
+﻿import {AQuery} from "./AQuery";
 
-export class QueryGroupPowerConsumption extends AQuery1.AQuery {
+export class QueryGroupPowerConsumption extends AQuery {
 
     private command = 161;
     private version = 1;

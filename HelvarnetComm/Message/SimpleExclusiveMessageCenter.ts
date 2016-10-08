@@ -1,11 +1,11 @@
-﻿import MessageCenter = require("./IMessageCenter");
-import Message = require("./IMessage");
-import Query = require("../Command/Query/AQuery");
-import Comm = require("../Comm/IComm");
-import UdpComm = require("../Comm/UDPComm");
-import Message1 = Message.IMessage;
+﻿import {IMessageCenter} from "./IMessageCenter";
+import {IMessage} from "./IMessage";
+import {AQuery} from "../Command/Query/AQuery";
+import {IComm} from "../Comm/IComm";
+import {UDPComm} from "../Comm/UDPComm";
+import {IReply} from "../Command/IReply";
 
-export class SimpleExclusiveMessageCenter implements MessageCenter.IMessageCenter {
+export class SimpleExclusiveMessageCenter implements IMessageCenter {
 
     static commandSign: string = '>';
     static internalCommandSign: string = '<';
@@ -17,13 +17,14 @@ export class SimpleExclusiveMessageCenter implements MessageCenter.IMessageCente
 
     
     sIpAddress: string;
-    comm: Comm.IComm;
+    comm: IComm;
 
     messages: { [id: string]: MessageWrapper; } = {};
+    promisses: { [id: string]: PromiseWrapper<IReply>; } = {};
 
     constructor(ipAddress: string) {
         this.sIpAddress = ipAddress;
-        this.comm = new UdpComm.UDPComm(this, 50001);
+        this.comm = new UDPComm(this, 50001);
     }
 
 
@@ -37,10 +38,12 @@ export class SimpleExclusiveMessageCenter implements MessageCenter.IMessageCente
         var tag = this.getTag(message, SimpleExclusiveMessageCenter.answerChar);
 
         var request = this.messages[tag];
+        var promiseWrap = this.promisses[tag];
 
         var data = this.getData(message);
 
         request.callback(data);
+        //promiseWrap.promise.
 
         delete this.messages[tag];
     }
@@ -49,7 +52,7 @@ export class SimpleExclusiveMessageCenter implements MessageCenter.IMessageCente
         
     }
 
-    addMessage(message: Message1): void {
+    addMessage(message: IMessage): void {
         this.sendString(message.toCommandString());
     }
 
@@ -57,11 +60,22 @@ export class SimpleExclusiveMessageCenter implements MessageCenter.IMessageCente
         this.comm.sendString(message);
     }
 
-    sendQuery<T extends Query.AQuery>(request: T): T {
-        return null;
+    sendQuery<T extends AQuery, TU extends IReply>(request: T): Promise<TU> {
+        var message = request.toCommandString();
+        var promise = new Promise<TU>((resolve, error) => {
+            
+        }); // TODO
+        var wrap = new PromiseWrapper<TU>(request, promise);
+        var tag = this.getTag(message, SimpleExclusiveMessageCenter.terminatorSign);
+
+        this.promisses[tag] = wrap;
+
+        this.sendString(message);
+
+        return promise;
     }
 
-    sendQueryWithCallback<T extends Query.AQuery>(request: T, callback: (result: string) => any): void {
+    sendQueryWithCallback<T extends AQuery>(request: T, callback: (result: string) => any): void {
         var message = request.toCommandString();
         var wrap = new MessageWrapper(request, callback);
         var tag = this.getTag(message, SimpleExclusiveMessageCenter.terminatorSign);
@@ -91,12 +105,24 @@ export class SimpleExclusiveMessageCenter implements MessageCenter.IMessageCente
 
 class MessageWrapper {
 
-    request: Query.AQuery;
+    request: AQuery;
     callback: (result: string) => any;
 
-    constructor(request: Query.AQuery, callback: (result: string) => any) {
+    constructor(request: AQuery, callback: (result: string) => any) {
         this.request = request;
         this.callback = callback;
+    }
+
+}
+
+class PromiseWrapper<T> {
+
+    request: AQuery;
+    promise: Promise<T>;
+
+    constructor(request: AQuery, promise: Promise<T>) {
+        this.request = request;
+        this.promise = promise;
     }
 
 }

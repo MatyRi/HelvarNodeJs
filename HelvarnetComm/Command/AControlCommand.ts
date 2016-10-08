@@ -1,7 +1,6 @@
-﻿//import Command = require("ACommand");
-import * as Command from "./ACommand";
+﻿import {ACommand} from "./ACommand";
 
-export abstract class AControlCommand extends Command.ACommand {
+export abstract class AControlCommand extends ACommand {
 
     constructor() { super(); }
     

@@ -1,9 +1,8 @@
-﻿import Message = require("../Message/IMessage");
-import Error = require("./IError");
-import Diagnostics = require("../EDiagnostics");
-import EDiagnostics = Diagnostics.EDiagnostics;
+﻿import {IMessage} from "../Message/IMessage";
+import {IError} from "./IError";
+import {EDiagnostics} from "../EDiagnostics";
 
-export abstract class ACommand implements Message.IMessage, Error.IError {
+export abstract class ACommand implements IMessage, IError {
 
     error: EDiagnostics = EDiagnostics.UNKNOWN;
 

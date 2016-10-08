@@ -1,22 +1,20 @@
-﻿import Comm = require("./IComm");
-import MessageCenter = require("../Message/IMessageCenter");
-import UdpCommonListener = require("./UDPCommonListener");
-import Center = MessageCenter.IMessageCenter;
-import CommonListener = UdpCommonListener.UDPCommonListener;
+﻿import {IComm} from "./IComm";
+import {IMessageCenter} from "../Message/IMessageCenter";
+import {UDPCommonListener} from "./UDPCommonListener";
 
-export class UDPComm implements Comm.IComm {
+export class UDPComm implements IComm {
 
     //private DatagramSocket clientSocket;
     public static DEFAULT_PORT: number = 50001;
 
     port: number;
     address: string;
-    messageCenter: Center;
+    messageCenter: IMessageCenter;
 
-    constructor(mc: Center, port: number) {
+    constructor(mc: IMessageCenter, port: number) {
         this.messageCenter = mc;
         this.port = port;
-        CommonListener.registerReceiver(mc.getAddress(), this);
+        UDPCommonListener.registerReceiver(mc.getAddress(), this);
         this.address = mc.getAddress();
     }
 

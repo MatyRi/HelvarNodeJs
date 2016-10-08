@@ -1,17 +1,17 @@
-﻿import ControlCommand = require("../AControlCommand");
-import Address = require("../../DeviceAddress");
+﻿import {AControlCommand} from "../AControlCommand";
+import {DeviceAddress} from "../../DeviceAddress";
 
-export class RecallSceneDevice extends ControlCommand.AControlCommand {
+export class RecallSceneDevice extends AControlCommand {
 
     private command = 12;
     private version = 1;
 
-    address: Address.DeviceAddress; // 1.2.3.4
+    address: DeviceAddress; // 1.2.3.4
     block: number; // 1-8
     scene: number; // 1-16
     fadeTime: number; // 0-6553.5s
 
-    constructor(address: Address.DeviceAddress, block: number, scene: number, fadeTime: number) {
+    constructor(address: DeviceAddress, block: number, scene: number, fadeTime: number) {
         super();
 
         this.address = address;

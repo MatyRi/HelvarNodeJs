@@ -1,14 +1,13 @@
-﻿import ControlCommand = require("../AControlCommand");
-import Address = require("../../DeviceAddress");
-import DeviceAddress = Address.DeviceAddress;
+﻿import {AControlCommand} from "../AControlCommand";
+import {DeviceAddress} from "../../DeviceAddress";
 
-export class DirectLevelDevice extends ControlCommand.AControlCommand {
+export class DirectLevelDevice extends AControlCommand {
 
     private command = 14;
     private version = 1;
 
     level: number;
-    address: Address.DeviceAddress;
+    address: DeviceAddress;
     fadeTime: number;
 
     constructor(level: number, address: DeviceAddress, fadeTime?: number) {
